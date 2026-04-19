@@ -111,35 +111,35 @@
 
         [data-theme="dark"] {
             /* Change glass to be darker and more subtle against pure black */
-            --glass: rgba(10, 10, 12, 0.75);
-            --glass-hover: rgba(20, 20, 25, 0.85);
+            --glass: rgba(15, 15, 18, 0.75);
+            --glass-hover: rgba(25, 25, 30, 0.85);
 
-            /* Main background changes */
+            /* Main background: Pure black */
             --bg-body: #000000;
-            /* Full Black */
 
-            /* These gradients create the "navy" tint, darkening them makes it blacker */
-            --bg-grad1: rgba(0, 0, 0, 0.95);
-            --bg-grad2: rgba(0, 0, 0, 0.90);
-            --bg-grad3: rgba(0, 0, 0, 0.85);
+            /* Neutral dark gradients - removed the navy/blue tints */
+            --bg-grad1: rgba(0, 0, 0, 1);
+            --bg-grad2: rgba(5, 5, 5, 0.95);
+            --bg-grad3: rgba(2, 2, 2, 0.90);
 
             /* The linear fall-back gradient */
-            --bg-lin: linear-gradient(150deg, #000000 0%, #050505 55%, #000000 100%);
+            --bg-lin: linear-gradient(150deg, #000000 0%, #080808 55%, #000000 100%);
+
+            /* Neutral Orbs: Using very subtle white/grey instead of blue */
+            --orb1: rgba(255, 255, 255, 0.03);
+            --orb2: rgba(255, 255, 255, 0.02);
+            --orb3: rgba(255, 255, 255, 0.02);
 
             /* Settings and Modal Backgrounds */
-            --sp-bg: rgba(10, 10, 10, 0.95);
+            --sp-bg: rgba(12, 12, 12, 0.98);
 
-            /* Keep other variables (text, accent, etc.) as they are */
+            /* Keep other variables */
             --text: #e6e9f4;
             --text2: #8a90a8;
             --muted: #4e5470;
             --accent: #5b9fff;
             --accent-soft: rgba(91, 159, 255, 0.12);
             --accent-glow: rgba(91, 159, 255, 0.28);
-            --orb1: rgba(40, 80, 200, 0.12);
-            /* Slightly lower opacity for black bg */
-            --orb2: rgba(70, 40, 155, 0.10);
-            --orb3: rgba(25, 95, 145, 0.10);
             --sp-border: rgba(255, 255, 255, 0.07);
             --sp-row-hover: rgba(255, 255, 255, 0.035);
             --divider: rgba(255, 255, 255, 0.06);
@@ -1268,9 +1268,10 @@
             <div class="pill" data-cat="research">Research</div>
             <div class="pill" data-cat="learn">Learn</div>
             <div class="pill" data-cat="tools">Tools</div>
-
+            <!-- by me   add pill with info -->
             <div class="pill" data-cat="security">Security</div>
             <div class="pill" data-cat="iot">IoT</div>
+            <div class="pill" data-cat="ide">IDEs</div>
         </div>
 
         <div class="meta-row">
@@ -1390,6 +1391,43 @@
         </div>
     </div>
 
+    <!-- by me -->
+    <div class="modal-overlay hidden" id="install-modal">
+        <div class="modal-panel">
+            <div class="m-header">
+                <h2 id="inst-name">Install IDE</h2>
+                <p>Choose your preferred installation method</p>
+            </div>
+
+            <div style="padding: 20px; display: flex; flex-direction: column; gap: 15px;">
+                <a id="inst-site-btn" href="#" target="_blank" class="btn-confirm"
+                    style="text-align:center; text-decoration:none;">Go to Official Site</a>
+
+                <div style="border-top: 1px solid var(--divider); padding-top: 15px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span class="sp-title">Terminal Command</span>
+                        <select class="sp-select" id="os-sel">
+                            <option value="wsl">WSL (Windows)</option>
+                            <option value="linux">Linux (Native)</option>
+                        </select>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 8px; font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); word-break: break-all;"
+                        id="cmd-text">
+                        <!-- // Command will appear here -->
+                    </div>
+                    <button class="pill" style="margin-top: 10px; width: 100%; border: 1.5px solid var(--accent);"
+                        onclick="copyCmd()">Copy Command</button>
+                </div>
+            </div>
+
+            <div class="m-footer">
+                <button class="btn-cancel" style="width: 100%;" id="inst-close">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         /* ══ DATA ══ */
         const FAV_API = d => `https://www.google.com/s2/favicons?domain=${d}&sz=64`;
@@ -1399,7 +1437,8 @@
             code: '#10b981', ai: '#3d7eff', ml: '#f59e0b',
             cloud: '#06b6d4', research: '#8b5cf6', learn: '#ec4899', tools: '#ef4444',
             security: '#6366f1',
-            iot: '#14b8a6'
+            iot: '#14b8a6',
+            ide: '#8b5cf6' // Violet color for IDEs
         };
 
         const domains = [
@@ -1493,8 +1532,29 @@
             { name: "Wokwi", url: "https://wokwi.com", desc: "Online IoT & Arduino simulator", cat: "iot" },
             { name: "MQTT.org", url: "https://mqtt.org", desc: "Standard for IoT messaging", cat: "iot" },
             { name: "ThingsBoard", url: "https://thingsboard.io", desc: "IoT device management platform", cat: "iot" },
-            { name: "PlatformIO", url: "https://platformio.org", desc: "Professional embedded development", cat: "iot" }
-        ];
+            { name: "PlatformIO", url: "https://platformio.org", desc: "Professional embedded development", cat: "iot" },
+            //ide's added
+            // Add these to your sites array
+            {
+                name: "VS Code",
+                url: "https://code.visualstudio.com",
+                desc: "Extensible code editor for every language",
+                cat: "ide",
+                type: "ide",
+                commands: {
+                    wsl: "wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg && sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg",
+                    linux: "sudo apt update && sudo apt install code"
+                }
+            },
+
+            {
+                name: "Neovim", url: "https://neovim.io", desc: "Hyperextensible Vim-based text editor", cat: "ide", type: "ide", commands:
+                {
+                    wsl: "sudo apt install neovim",
+                    linux: "sudo pacman -S neovim" // Example for Arch or use sudo apt install neovim
+                }
+            }
+        ];  //ide blocks by me
 
         /* ══ STATE ══ */
         let activeCat = 'all';
@@ -1746,6 +1806,48 @@
             filtered.forEach((s, i) => grid.insertBefore(makeCard(s, i), emptyState));
 
             checkEmpty();
+        }
+
+        //by me 
+        /* ── INSTALLATION MODAL LOGIC ── */
+        let activeIDE = null;
+        const instModal = document.getElementById('install-modal');
+        const osSel = document.getElementById('os-sel');
+        const cmdText = document.getElementById('cmd-text');
+
+        function openInstallModal(ide) {
+            activeIDE = ide;
+            document.getElementById('inst-name').textContent = `Install ${ide.name}`;
+            document.getElementById('inst-site-btn').href = ide.url;
+            updateCmdDisplay();
+            instModal.classList.remove('hidden');
+        }
+
+        function updateCmdDisplay() {
+            if (!activeIDE) return;
+            const os = osSel.value;
+            // Fallback if commands for a specific OS aren't defined
+            cmdText.textContent = activeIDE.commands[os] || "No command available for this OS";
+        }
+
+        // OS Switcher listener
+        osSel.addEventListener('change', updateCmdDisplay);
+
+        // Close modal listener
+        document.getElementById('inst-close').addEventListener('click', () => {
+            instModal.classList.add('hidden');
+        });
+
+        // Copy to clipboard helper
+        function copyCmd() {
+            const text = cmdText.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                // Optional: Change button text temporarily
+                const btn = document.querySelector('[onclick="copyCmd()"]');
+                const oldText = btn.innerText;
+                btn.innerText = "Copied!";
+                setTimeout(() => btn.innerText = oldText, 2000);
+            });
         }
 
         render();
