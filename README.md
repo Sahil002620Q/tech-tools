@@ -1,4 +1,4 @@
-# Dev Hub
+<!--# Dev Hub
 
 A high-performance, minimalist dashboard designed for developers to manage and access technical resources across various domains including AI, Machine Learning, Cybersecurity, and IoT.
 
@@ -28,4 +28,50 @@ Dev Hub serves as a centralized command center for developers. It eliminates the
 ## Setup and Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/sahil002620q/dev-hub.git
+   git clone https://github.com/sahil002620q/dev-hub.git-->
+   # 🚀 Dev Hub
+
+[![GitHub License](https://img.shields.io/github/license/sahil002620q/dev-hub?style=flat-square&color=blue)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/sahil002620q/dev-hub?style=flat-square)](https://github.com/sahil002620q/dev-hub/stargazers)
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen?style=for-the-badge&logo=github)](https://sahil002620q.github.io/dev-hub/)
+
+**Dev Hub** is a centralized dashboard designed for developers to discover, organize, and access tools across multiple domains including AI, Cybersecurity, Cloud, and more.
+
+---
+
+## 🌐 Live Preview
+> [!TIP]
+> **[Click here to open the Interactive Dev Hub Dashboard](https://sahil002620q.github.io/dev-hub/)**
+> 
+> *Note: GitHub READMEs are static. To experience the interactive filters, themes, and tool selection, please visit the live link above.*
+
+---
+
+## ✨ Key Features
+
+- 🛠 **Multi-Domain Filtering**: Toggle between AI/LLM, Security, ML & Data, Cloud, and IoT.
+- 🎨 **Dynamic UI**: 
+  - **Themes**: Switch between Light and Dark modes.
+  - **Accents**: Customize the dashboard with different accent colors.
+  - **Layouts**: Choose from Compact, Comfortable, or Spacious card views.
+- ❤️ **Favorites System**: Save your most-used tools locally for instant access.
+- 💻 **IDE Installer**: Quick-access commands for setting up development environments on WSL and Linux.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Vanilla JavaScript, HTML5, CSS3
+- **Deployment**: GitHub Pages
+- **Styling**: Custom CSS Variables for real-time theme switching
+
+---
+
+## 🚀 Getting Started
+
+To run this project locally:
+
+1. **Clone the repository**
+   ```bash
+   git clone [https://github.com/sahil002620q/dev-hub.git](https://github.com/sahil002620q/dev-hub.git)
+   
